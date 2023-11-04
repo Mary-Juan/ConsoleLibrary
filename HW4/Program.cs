@@ -11,8 +11,9 @@ Book book1 = new Book()
     Writer = "folani",
     DateOfRelease = new DateTime(),
     Id = 1,
-    IsBorrowed = false
-    
+    IsBorrowed = false,
+    Genres = Book.Genre.cooking
+
 };
 
 Book book2 = new Book()
@@ -21,7 +22,8 @@ Book book2 = new Book()
     Writer = "bolani",
     DateOfRelease = new DateTime(),
     Id = 2,
-    IsBorrowed = false
+    IsBorrowed = false,
+    Genres = Book.Genre.Novel
 };
 
 Book book3 = new Book()
@@ -30,7 +32,8 @@ Book book3 = new Book()
     Writer = "bahmani",
     DateOfRelease = new DateTime(),
     Id = 3,
-    IsBorrowed = false
+    IsBorrowed = false,
+    Genres = Book.Genre.Scientific
 };
 
 Role role = new Role()

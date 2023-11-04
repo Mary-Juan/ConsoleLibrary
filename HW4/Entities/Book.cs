@@ -11,7 +11,7 @@ namespace HW4.Entities
 
        public enum Genre
         {
-            Scientific,
+            Scientific = 1,
             Novel,
             historical,
             cooking

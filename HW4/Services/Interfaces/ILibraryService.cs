@@ -13,6 +13,6 @@ namespace HW4.Services.Interfaces
         public bool ReturnBook(int bookId, long userId);
         public Book[] GetListOfLibraryBooks();
         public Book[] GetListOfUserBooks(long id);
-        public Book[] GetBooksByGenres(string genre);
+        public Book[] GetBooksByGenres(int genre);
     }
 }

@@ -27,11 +27,29 @@ namespace HW4.Forms
             {
                 case "1":
                     {
+                        int genre = 0;
+
+                        while (true)
+                        {
+                            genre = GenresMenu();
+                            if (genre != 0)
+                                break;
+                            Console.WriteLine("enter correct number of option!");
+                        }
+
+                        Book[] books = libraryService.GetBooksByGenres(genre);
+                        foreach (Book book in books)
+                        {
+                            ShowBook(book);
+                        }
+
                         Console.WriteLine("enter book id: ");
                         int bookId = int.Parse(Console.ReadLine());
 
                         if (libraryService.BorrowBook(bookId, userId))
+                        {
                             Console.WriteLine("Borrowing was successful. enter 'b' to back to menu | enter 'e' to exit");
+                        }
                         else
                             Console.WriteLine("Borrowing was unsuccessful. enter 'b' to back to menu | enter 'e' to exit");
 
@@ -41,10 +59,11 @@ namespace HW4.Forms
                         {
                             toContinue = true;
                         }
-                        
+
                         break;
                     }
-                case "2": {
+                case "2":
+                    {
                         Console.WriteLine("enter book id: ");
                         int bookId = int.Parse(Console.ReadLine());
 
@@ -62,13 +81,12 @@ namespace HW4.Forms
 
                         break;
                     }
-                    
-                case "3": {
-                        foreach(var book in libraryService.GetListOfUserBooks(userId))
+
+                case "3":
+                    {
+                        foreach (var book in libraryService.GetListOfUserBooks(userId))
                         {
-                            Console.WriteLine("Name: " + book.Name);
-                            Console.WriteLine("writer: " + book.Writer);
-                            Console.WriteLine("Date of Realese: " + book.DateOfRelease);
+                            ShowBook(book);
                             Console.WriteLine("-------------");
                         }
 
@@ -81,16 +99,14 @@ namespace HW4.Forms
                             toContinue = true;
                         }
 
-                        break; }
+                        break;
+                    }
 
-                case "4": {
+                case "4":
+                    {
                         foreach (Book book in libraryService.GetListOfLibraryBooks())
                         {
-                            Console.WriteLine("Name: " + book.Name);
-                            Console.WriteLine("writer: " + book.Writer);
-                            Console.WriteLine("Date of Realese: " + book.DateOfRelease);
-                            Console.WriteLine("Id : " + book.Id);
-                            Console.WriteLine("-------------");
+                            ShowBook(book);
                         }
 
                         Console.WriteLine("enter 'b' to back to menu | enter 'e' to exit");
@@ -101,15 +117,37 @@ namespace HW4.Forms
                             toContinue = true;
                         }
 
-                        break; }
-                case "5": {                        
-                        break; }
-                default: {
+                        break;
+                    }
+                case "5":
+                    {
+                        break;
+                    }
+                default:
+                    {
                         Console.WriteLine("please enter a number between 1 to 5");
                         toContinue = true;
-                        break; }
+                        break;
+                    }
             }
             return toContinue;
+        }
+
+        public int GenresMenu()
+        {
+            Console.WriteLine("What genre of book do you want to borrow?\n1.Scientific\n2.Novel\n3.historical\n4.cooking");
+            if (int.TryParse(Console.ReadLine(), out int option))
+                return option;
+            return 0;
+        }
+
+        public void ShowBook(Book book)
+        {
+            Console.WriteLine("Name: " + book.Name);
+            Console.WriteLine("writer: " + book.Writer);
+            Console.WriteLine("Date of Realese: " + book.DateOfRelease);
+            Console.WriteLine("Id : " + book.Id);
+            Console.WriteLine("-------------");
         }
     }
 }

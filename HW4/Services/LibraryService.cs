@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static HW4.Entities.Book;
 
 namespace HW4.Services
 {
@@ -36,7 +37,11 @@ namespace HW4.Services
             }
         }
 
-       
+        public Book[] GetBooksByGenres(int genre)
+        {
+            Genre booksGenre = (Genre)genre;
+            return Database.Database.AllBooks.Where(b => b.Genres == booksGenre).ToArray();
+        }
 
         public Book[] GetListOfLibraryBooks()
         {
