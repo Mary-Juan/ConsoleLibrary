@@ -1,4 +1,5 @@
-﻿using HW4.Entities;
+﻿using HW4.DTOs;
+using HW4.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace HW4.Services.Interfaces
         public Book[] GetListOfLibraryBooks();
         public Book[] GetListOfUserBooks(long id);
         public Book[] GetBooksByGenres(int genre);
+        public bool AddBook(BookDTO bookDto);
     }
 }

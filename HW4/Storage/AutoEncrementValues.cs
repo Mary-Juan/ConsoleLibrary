@@ -9,5 +9,6 @@ namespace HW4.storage
     internal static class AutoEncrementValues
     {
         public static int PersonalId = 1;
+        public static int BookId = 1;
     }
 }

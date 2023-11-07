@@ -1,5 +1,7 @@
-﻿using HW4.Entities;
+﻿using HW4.DTOs;
+using HW4.Entities;
 using HW4.Services.Interfaces;
+using HW4.storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,29 @@ namespace HW4.Services
     {
 
         Utility utility = new Utility();
+
+        public bool AddBook(BookDTO bookDto)
+        {
+            try
+            {
+                Book book = new Book()
+                {
+                    Id = AutoEncrementValues.BookId++,
+                    Name = bookDto.Name,
+                    Writer = bookDto.Writer,
+                    Genres = (Genre)bookDto.Genre,
+                    BorrowedDate = null,
+                    IsBorrowed = false,
+                    DateOfRelease = null
+                };
+
+                Database.Database.AllBooks = Database.Database.AllBooks.Append(book).ToArray();
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
         public bool BorrowBook(int bookId, long userId)
         {

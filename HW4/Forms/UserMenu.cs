@@ -1,4 +1,5 @@
-﻿using HW4.Entities;
+﻿using HW4.DTOs;
+using HW4.Entities;
 using HW4.Services;
 using HW4.Services.Interfaces;
 using System;
@@ -27,6 +28,7 @@ namespace HW4.Forms
             {
                 case "1":
                     {
+                        Console.WriteLine("What genre of book do you want to borrow?");
                         int genre = 0;
 
                         while (true)
@@ -135,7 +137,7 @@ namespace HW4.Forms
 
         public int GenresMenu()
         {
-            Console.WriteLine("What genre of book do you want to borrow?\n1.Scientific\n2.Novel\n3.historical\n4.cooking");
+            Console.WriteLine("1.Scientific\n2.Novel\n3.historical\n4.cooking");
             if (int.TryParse(Console.ReadLine(), out int option))
                 return option;
             return 0;
@@ -149,5 +151,50 @@ namespace HW4.Forms
             Console.WriteLine("Id : " + book.Id);
             Console.WriteLine("-------------");
         }
+
+        public bool LibraryManagerMenu(long userId)
+        {
+            bool toContinue = false;
+            Console.WriteLine("1.Add Book \n 2.Delete Book \n 3.Show All Books \n 4.Show All Borrowed Books \n 5.Logout");
+            string option = Console.ReadLine();
+
+            switch(option)
+            {
+                case "1": {
+                        Console.WriteLine("Enter the name of book:");
+                        string bookName = Console.ReadLine();
+
+                        Console.WriteLine("Enter the writer of book:");
+                        string writerName = Console.ReadLine();
+
+                        Console.WriteLine("What's the genre of the book?");
+
+                        int genre = 0;
+
+                        while (true)
+                        {
+                            genre = GenresMenu();
+                            if (genre != 0)
+                                break;
+                            Console.WriteLine("enter correct number of option!");
+                        }
+
+                        BookDTO book = new BookDTO()
+                        {
+                            Name = bookName,
+                            Writer = writerName,
+                            Genre = genre
+                        };
+
+                        if(libraryService.AddBook(book))
+                            Console.WriteLine("Adding book was successful");
+                        else
+                            Console.WriteLine("Adding book was not successful");
+
+                        break; }
+            }
+        }
     }
+
+
 }
