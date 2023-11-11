@@ -16,6 +16,7 @@ namespace HW4.Forms
     {
 
         ILibraryService libraryService = new LibraryService();
+        ILibrarianRepository librarianRepository = new LibrarianRepository();
         Utility utility = new Utility();
 
         public bool MemberMenu(long userId)
@@ -106,7 +107,7 @@ namespace HW4.Forms
 
                 case "4":
                     {
-                        foreach (Book book in libraryService.GetListOfLibraryBooks())
+                        foreach (Book book in libraryService.GetListOfUnBorrowedBooks())
                         {
                             ShowBook(book);
                         }
@@ -152,7 +153,7 @@ namespace HW4.Forms
             Console.WriteLine("-------------");
         }
 
-        public bool LibraryManagerMenu(long userId)
+        public void LibraryManagerMenu(long userId)
         {
             bool toContinue = false;
             Console.WriteLine("1.Add Book \n 2.Delete Book \n 3.Show All Books \n 4.Show All Borrowed Books \n 5.Logout");
@@ -186,12 +187,93 @@ namespace HW4.Forms
                             Genre = genre
                         };
 
-                        if(libraryService.AddBook(book))
+                        if(librarianRepository.AddBook(book))
                             Console.WriteLine("Adding book was successful");
                         else
                             Console.WriteLine("Adding book was not successful");
 
+                        Console.WriteLine("enter 'b' to back to menu | enter 'e' to exit");
+                        string input = Console.ReadLine();
+
+                        if (input == "b")
+                        {
+                            toContinue = true;
+                        }
+
                         break; }
+
+                case "2":
+                    {
+                        foreach (Book book in libraryService.GetListOfLibraryBooks())
+                        {
+                            ShowBook(book);
+                        }
+
+                        Console.WriteLine("enter the book's Id to delete:");
+
+                        int bookId = 0;
+
+                        while(true)
+                        {
+                            if (int.TryParse(Console.ReadLine(), out bookId))
+                            {
+                                break;
+                            }
+                            else
+                                Console.WriteLine("enter the correct form of bookId");
+                        }
+
+                        if(librarianRepository.DeleteBook(bookId))
+                            Console.WriteLine("Deleting was successful.");
+                        else
+                            Console.WriteLine("Deleting was not successful!!");
+
+                        Console.WriteLine("enter 'b' to back to menu | enter 'e' to exit");
+                        string input = Console.ReadLine();
+
+                        if (input == "b")
+                        {
+                            toContinue = true;
+                        }
+
+                        break;
+                    }
+                    case "3": {
+                        foreach (Book book in libraryService.GetListOfLibraryBooks())
+                        {
+                            ShowBook(book);
+                        }
+
+                        Console.WriteLine("enter 'b' to back to menu | enter 'e' to exit");
+                        string input = Console.ReadLine();
+
+                        if (input == "b")
+                        {
+                            toContinue = true;
+                        }
+
+                        break;
+                    }
+                    case "4":
+                    {
+                        foreach (Book book in libraryService.GetListOfUnBorrowedBooks())
+                        {
+                            ShowBook(book);
+                        }
+
+                        Console.WriteLine("enter 'b' to back to menu | enter 'e' to exit");
+                        string input = Console.ReadLine();
+
+                        if (input == "b")
+                        {
+                            toContinue = true;
+                        }
+
+                        break;
+                    }
+                    case "5": {
+                        break;
+                    }
             }
         }
     }

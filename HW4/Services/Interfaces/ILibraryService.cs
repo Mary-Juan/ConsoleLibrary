@@ -13,8 +13,9 @@ namespace HW4.Services.Interfaces
         public bool BorrowBook(int bookId, long userId);
         public bool ReturnBook(int bookId, long userId);
         public Book[] GetListOfLibraryBooks();
+        public Book[] GetListOfUnBorrowedBooks();
         public Book[] GetListOfUserBooks(long id);
         public Book[] GetBooksByGenres(int genre);
-        public bool AddBook(BookDTO bookDto);
+      
     }
 }

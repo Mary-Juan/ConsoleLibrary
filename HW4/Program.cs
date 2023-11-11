@@ -56,12 +56,33 @@ Member user = new Member()
     Role = role
 };
 
+Role role2 = new Role()
+{
+    RoleId = 2,
+    RoleTitle = "manager"
+};
+
+Member user2 = new Member()
+{
+    NationalCode = 22,
+    Age = 1,
+    PecuniaryDamages = 1,
+    RegisterDate = DateTime.Now,
+    CreditBalance = DateTime.Now,
+    Education = "jhf",
+    Email = "ww",
+    Password = "ww",
+    FullName = "hyf",
+    Role = role2
+};
+
 
 Database.AllBooks = Database.AllBooks.Append(book1).ToArray();
 Database.AllBooks = Database.AllBooks.Append(book2).ToArray();
 Database.AllBooks = Database.AllBooks.Append(book3).ToArray();
 
 Database.Members = Database.Members.Append(user).ToArray();
+Database.Members = Database.Members.Append(user2).ToArray();
 
 IAuthentication authentication = new Authentication();
 Utility utility = new Utility();

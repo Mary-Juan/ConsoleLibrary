@@ -9,9 +9,10 @@ namespace HW4.Services
 {
     internal class Utility
     {
-        public Member? GetMemberById(long nationalCode)
+       
+        public Member? GetMemberById(long nationalCode, Member[] members)
         {
-            foreach (Member member in Database.Database.Members)
+            foreach (Member member in members)
             {
                 if (member.NationalCode == nationalCode)
                 {
@@ -21,9 +22,9 @@ namespace HW4.Services
             return null;
         }
 
-        public Book? GetBookById(long id)
+        public Book? GetBookById(long id, Book[] books)
         {
-            foreach (Book book in Database.Database.AllBooks)
+            foreach (Book book in books)
             {
                 if (book.Id == id)
                 {
@@ -33,9 +34,9 @@ namespace HW4.Services
             return null;
         }
 
-        public long GetIdByEmail(string email)
+        public long GetIdByEmail(string email, Member[] members)
         {
-            foreach (Member member in Database.Database.Members)
+            foreach (Member member in members)
             {
                 if (member.Email == email)
                 {
